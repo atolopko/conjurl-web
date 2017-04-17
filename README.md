@@ -40,12 +40,12 @@ $ eb create conjurlweb-prod --single -i t2.micro -r us-east-2 --keyname conjurl-
 $ eb setenv SECRET_KEY_BASE=`rails secret` \
 DOMAIN_NAME=http://`eb status | grep CNAME: | awk '{ print $2 }'` \
 CONJURL_JWT_SECRET=<YOUR_SUPER_SECURE_JWT_SECRET> \
-API_BASE_URL=http://<CONJURL_HOST>
+API_BASE_URL=http://<CONJURL_HOST>/api
 ```
 
 Notes:
 - `YOUR_SUPER_SECURE_JWT_SECRET` must match the Conjurl server value.
-- `CONJURL_HOST` can be found by running `eb status | grep CNAME: | awk '{ print $2 }'` from the Conjurl project directory.
+- `CONJURL_HOST` can be found by running `eb status | grep CNAME: | awk '{ print $2 }'` from the Conjurl (API) project directory.
 
 To deploy Git-committed updates to the current AWS Elastic Beanstalk environment:
 ```
