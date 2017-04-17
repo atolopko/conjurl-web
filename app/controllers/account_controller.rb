@@ -1,9 +1,15 @@
 class AccountController < ApplicationController
   def index
+    if @account_pid && @jwt
+      api(:get, "/accounts/#{@account_pid}/short_urls") do |resp_data|
+        @short_urls = resp_data.join(',')
+      end
+    end
   end
   
   def create
-    api(:post, '/accounts', name: params[:account_name]) do |resp_data|
+    api(:post, '/accounts',
+        params: { name: params[:account_name] }) do |resp_data|
       cookies['account_jwt'] = resp_data[:jwt]
     end
     if cookies['account_jwt']

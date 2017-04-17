@@ -16,13 +16,13 @@
       </div>
       <% else %>
       <h3>Hello, <%= @account_name %></h3>
+      <p><%= @short_urls %></p>
       <div class='action'>
-        <%= button_to('Logout', account_logout_path,
-            method: :get) %>
+        <%= button_to('Logout', account_logout_path, method: :get) %>
       </div>
       <% end %>
 
-      <div class='action'><%= link_to('Back', root_path) %></div>
+      <div class='action text-center'><%= link_to('Back', root_path) %></div>
 
     </div>
   </div>

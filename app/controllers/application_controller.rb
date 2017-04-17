@@ -5,9 +5,23 @@ class ApplicationController < ActionController::Base
 
   private 
 
-  def api(method, endpoint, **args)
-    resp = RestClient.send(method, Settings.api_base_url + endpoint, args)
+  def api(http_method, endpoint, params: {})
+    url = Settings.api_base_url + endpoint
+
+    headers = {}
+    headers.merge!('Authorization' => "Bearer #{@jwt}") if @jwt
+
+    resp =
+      case http_method
+      when :get
+        options = headers.merge(params) # Don't ask. RestClient has a poor API
+        RestClient.get(url, options)
+      when :post
+        RestClient.post(url, params, headers)
+      end
+
     resp_data = JSON.parse(resp, symbolize_names: true)
+
     if block_given?
       yield resp_data
     else
@@ -25,10 +39,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_account 
-    jwt = cookies['account_jwt']
-    return unless jwt.present?
-    payload = authenticate(jwt)
+    @jwt = cookies['account_jwt']
+    return unless @jwt.present?
+    payload = authenticate(@jwt)
     if payload
+      @account_pid = payload['sub']
       @account_name = payload['name']
     end
   end
