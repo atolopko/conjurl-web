@@ -18,9 +18,22 @@
       <% if @long_url && @short_url %>
       <h3>Your long URL is:</h2>
       <p class=""><%= link_to(@long_url, @long_url) %></p>
-      <h3>Your shiny new short URL is:</h2>
-      <p class=""><%= link_to(@short_url, @short_url) %></p>
+      <% adjective = @short_url.length < @long_url.length ? 'short' : '"short"' %>
+      <h3>Your shiny new <%= adjective %> URL is:</h2>
+      <p class="lead">
+        <input id='short_url' value='<%= @short_url %>'/>
+      </p>
+      <button class='my_clip_button' data-clipboard-target='short_url'
+              id='d_clip_button' title='Copy the short URL to clipboard.'>
+        <b>Copy</b>
+      </button>
       <% end %>
+
+      <script>
+        $(document).ready(function() {
+          var clip = new ZeroClipboard($("#d_clip_button"))
+        });
+      </script>
 
     </div>
   </div>
