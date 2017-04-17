@@ -16,7 +16,7 @@
       </div>
       <% else %>
       <h3>Hello, <%= @account_name %></h3>
-      <p><%= @short_urls %></p>
+
       <div class='action'>
         <%= button_to('Logout', account_logout_path, method: :get) %>
       </div>
@@ -24,6 +24,29 @@
 
       <div class='action text-center'><%= link_to('Back', root_path) %></div>
 
+      <table class="table table-hover table-bordered table-condensed table-responsive text-left">
+        <thead>
+          <tr>
+            <th>Short URL</th>
+            <th>Target URL</th>
+            <th>Clicks</th>
+            <th>Referrers</th>
+            <th>IP Addresses</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <% @short_urls.each do |short_url| %>
+        <tr>
+          <td><%= link_to short_url[:short_url], short_url[:short_url] %></td>
+          <td><%= link_to short_url[:target_url], short_url[:target_url] %></td>
+          <td><%= short_url[:stats][:lifetime][:clicks] %></td>
+          <td><%= short_url[:stats][:lifetime][:unique_referrers] %></td>
+          <td><%= short_url[:stats][:lifetime][:unique_ip_addresses] %></td>
+          <td><%= short_url[:created_at].to_date %></td>
+        </tr>
+        <% end %>
+      </table>
+      
     </div>
   </div>
   <!-- /.row -->

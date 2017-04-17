@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
   private 
 
   def api(http_method, endpoint, params: {})
-    url = Settings.api_base_url + endpoint
+    if endpoint.starts_with? 'http'
+      url = endpoint
+    else
+      url = Settings.api_base_url + endpoint
+    end
 
     headers = {}
     headers.merge!('Authorization' => "Bearer #{@jwt}") if @jwt
