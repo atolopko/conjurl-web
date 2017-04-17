@@ -15,7 +15,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass'
 gem 'high_voltage'
-gem 'pg'
+gem 'sqlite3'
 gem 'simple_form'
 gem 'rest-client', '~> 1.8'
 
@@ -28,8 +28,6 @@ end
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
   gem 'rails_layout'
 end

@@ -82,3 +82,8 @@ pickle-email-*.html
 
 # tilde files are usually backup files from a text editor
 *~
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
