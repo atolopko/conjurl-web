@@ -3,19 +3,33 @@ class UrlShortenerController < ApplicationController
   end
   
   def shorten
-    resp = RestClient.post("http://localhost:3001/api/short_urls", target_url: params[:long_url])
-    resp_data = JSON.parse(resp, symbolize_names: true)
-    Rails.logger.debug(resp_data)
-    @long_url = resp_data[:target_url]
-    @short_url = resp_data[:short_url] 
+    api(:post, '/short_urls', target_url: params[:long_url]) do |resp_data|
+      @long_url = resp_data[:target_url]
+      @short_url = resp_data[:short_url]
+    end
     render 'index'
+  end
+
+  private
+
+  def api(method, endpoint, **args)
+    resp = RestClient.send(method, Settings.api_base_url + endpoint, args)
+    resp_data = JSON.parse(resp, symbolize_names: true)
+    if block_given?
+      yield resp_data
+    else
+      resp_data
+    end
   rescue RestClient::Exception => e
     if e.http_code == 400
-      flash.now[:error] = "Error! #{JSON.parse(e.response)['error']}"
+      resp_data = JSON.parse(e.response)
+      flash.now[:error] = "Error! #{resp_data['error']}"
     else
       flash.now[:error] = "Sorry, something went wrong!"
       Rails.logger.error(e)
     end
-    render 'index'
+    nil
   end
+
+  
 end

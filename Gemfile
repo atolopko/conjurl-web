@@ -18,6 +18,8 @@ gem 'high_voltage'
 gem 'sqlite3'
 gem 'simple_form'
 gem 'rest-client', '~> 1.8'
+gem 'config', '~> 1.4'
+gem 'jwt', '~> 1.5', '>= 1.5.4'
 
 group :development, :test do
   gem 'pry-rails'

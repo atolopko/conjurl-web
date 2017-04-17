@@ -87,3 +87,7 @@ pickle-email-*.html
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
