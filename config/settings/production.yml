@@ -1,1 +1,3 @@
 api_base_url: <%= ENV['API_BASE_URL'] %>
+
+jwt_secret: <%= ENV['CONJURL_JWT_SECRET'] %>

@@ -4,8 +4,16 @@
   <div class="row">
     <div class="col-lg-12 text-center">
       <h1>Conjurl - Short URL Generator</h1>
-      <p class="lead">Take a long URL and shorten it!<br/>Share or post the short
-      URL anywhere!</p>
+      <p class="lead">Take a long URL and shorten it!<br/>
+        Share or post the short URL anywhere!</p>
+
+      <p class='action'>
+        <% if @account_name %>
+        <%= link_to("Hello, #{@account_name}!", account_path) %>
+        <% else %>
+        <%= button_to('Create Account', account_path, method: :get) %>
+        <% end %>
+      </p>
 
       <div class="lead">
       <%= form_tag(controller: "url_shortener", action: "shorten") do %>
@@ -16,10 +24,10 @@
       </div>
 
       <% if @long_url && @short_url %>
-      <h3>Your long URL is:</h2>
+      <h3>Your long URL is:</h3>
       <p class=""><%= link_to(@long_url, @long_url) %></p>
       <% adjective = @short_url.length < @long_url.length ? 'short' : '"short"' %>
-      <h3>Your shiny new <%= adjective %> URL is:</h2>
+      <h3>Your shiny new <%= adjective %> URL is:</h3>
       <p class="lead">
         <input id='short_url' value='<%= @short_url %>'/>
       </p>

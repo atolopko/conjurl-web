@@ -1,0 +1,24 @@
+class AccountController < ApplicationController
+  def index
+  end
+  
+  def create
+    api(:post, '/accounts', name: params[:account_name]) do |resp_data|
+      cookies['account_jwt'] = resp_data[:jwt]
+    end
+    if cookies['account_jwt']
+      flash[:notice] = 'Thanks for joining!'
+      redirect_to root_path
+    else
+      render 'index'
+    end
+  end
+
+  def logout
+    cookies.delete('account_jwt')
+    redirect_to root_path
+  end
+
+  private
+  
+end

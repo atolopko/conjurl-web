@@ -1,0 +1,32 @@
+<!-- Page Content -->
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h1>Conjurl - Short URL Generator</h1>
+
+      <% if @account_name.nil? %>
+      <h3>Create a new account to manage and track your short URLs</h3>
+      <div class="lead">
+      <%= form_tag(controller: "account", action: "create") do %>
+        <%= label_tag(:account_name, "Name:") %>
+        <%= text_field_tag(:account_name) %>
+        <%= submit_tag("Create") %>
+      <% end %>
+      </div>
+      <% else %>
+      <h3>Hello, <%= @account_name %></h3>
+      <div class='action'>
+        <%= button_to('Logout', account_logout_path,
+            method: :get) %>
+      </div>
+      <% end %>
+
+      <div class='action'><%= link_to('Back', root_path) %></div>
+
+    </div>
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->
