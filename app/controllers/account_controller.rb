@@ -24,7 +24,7 @@ class AccountController < ApplicationController
   private
 
   def fetch_short_urls_data
-    return unless  @account_pid && @jwt
+    return [] unless  @account_pid && @jwt
 
     # TODO: This makes too many API calls! But the API engineering
     # team won't budge on adding a better endpoint...
