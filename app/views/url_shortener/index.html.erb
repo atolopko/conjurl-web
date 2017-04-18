@@ -3,10 +3,10 @@
 
   <div class="row">
     <div class="col-lg-12 text-center">
-      <h1>Conjurl - Short URL Generator</h1>
+      <h1>ConjURL - Short URL Generator</h1>
 
       <% if @account_name %>
-      <div class="lead">Hello, <%= @account_name %></div>
+      <div class="lead">Hello, <%= link_to @account_name, account_path %></div>
       <% else %>
       <p class="lead">Take a long URL and shorten it!<br/>
         Share or post the short URL anywhere!</p>
@@ -22,7 +22,7 @@
 
       <% if @long_url && @short_url %>
       <h3>Your long URL is:</h3>
-      <p class=""><%= link_to(@long_url, @long_url) %></p>
+      <p><%= link_to(@long_url, @long_url) %></p>
       <% adjective = @short_url.length < @long_url.length ? 'short' : '"short"' %>
       <h3>Your shiny new <%= adjective %> URL is:</h3>
       <p class="lead">

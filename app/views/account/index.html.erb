@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-lg-12 text-center">
-      <h1>Conjurl - Short URL Generator</h1>
+      <h1>ConjURL - Short URL Generator</h1>
 
       <% if @account_name.nil? %>
 
@@ -19,8 +19,10 @@
       <% else %>
 
       <div class="lead">Hello, <%= @account_name %></div>
+
       <div class='btn-secondary btn-sm'>
-        <%= button_to('Logout', account_logout_path, method: :get) %>
+        <%= button_to('Logout', account_logout_path, method: :get,
+            data: { confirm: "Depending upon engineering progress, you might not be able to log back in. Really logout?" }) %>
       </div>
 
       <% end %>
@@ -51,8 +53,8 @@
         </tr>
         <% end %>
       </table>
-      <% else %>
-      You have not shortened any URLs yet. You should, it's fun!
+      <% elsif @account_name %>
+      You have not shortened any URLs yet. You <%= link_to 'should', url_shortener_path %>, it's fun!
       <% end %>
       
     </div>
