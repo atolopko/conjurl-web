@@ -1,4 +1,4 @@
-Conjurlweb - URL shortener web app
+Conjurl Web App - URL shortener web app
 
 # Overview
 
@@ -18,7 +18,7 @@ Conjurlweb - URL shortener web app
 
 - Ruby 2.2.3
 - Rails 5.0.2
-- Conjurl (API server)
+- [Conjurl API](https://github.com/atolopko/conjurl-api)
 
 ## Run server (localhost)
 
